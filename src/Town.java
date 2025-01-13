@@ -63,10 +63,10 @@ public class Town {
         boolean canLeaveTown = terrain.canCrossTerrain(hunter);
         if (canLeaveTown) {
             String item = terrain.getNeededItem();
-            printMessage = "You used your " + item + " to cross the " + terrain.getTerrainName() + ".";
+            printMessage = "You used your " + Colors.PURPLE + item + " to cross the " + terrain.getTerrainName() + ".";
             if (checkItemBreak()) {
                 hunter.removeItemFromKit(item);
-                printMessage += "\nUnfortunately, your " + item + " broke.";
+                printMessage += "\nUnfortunately, your " + Colors.PURPLE + item + " broke.";
             }
             return true;
         }
@@ -99,15 +99,15 @@ public class Town {
         if (Math.random() > noTroubleChance) {
             System.out.println("You couldn't find any trouble");
         } else {
-            System.out.println("You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n");
+            System.out.println(Colors.RED +"You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n");
             int goldDiff = (int) (Math.random() * 10) + 1;
             if (Math.random() > noTroubleChance) {
-                System.out.println("Okay, stranger! You proved yer mettle. Here, take my gold.");
+                System.out.println(Colors.RED + "Okay, stranger! You proved yer mettle. Here, take my gold.");
                 System.out.println("\nYou won the brawl and receive " + goldDiff + " gold.");
                 hunter.changeGold(goldDiff);
             } else {
-                System.out.println("That'll teach you to go lookin' fer trouble in MY town! Now pay up!");
-                System.out.println("\nYou lost the brawl and pay " + goldDiff + " gold.");
+                System.out.println(Colors.RED + "That'll teach you to go lookin' fer trouble in MY town! Now pay up!");
+                System.out.println(Colors.RED + "\nYou lost the brawl and pay " + goldDiff + " gold.");
                 hunter.changeGold(-goldDiff);
                 if (hunter.getGold() < 0) {
                     return "end";
@@ -118,7 +118,7 @@ public class Town {
     }
 
     public String infoString() {
-        return "This nice little town is surrounded by " + terrain.getTerrainName() + ".";
+        return "This nice little town is surrounded by " + Colors.CYAN + terrain.getTerrainName() + "." + Colors.RESET;
     }
 
     /**
@@ -127,15 +127,17 @@ public class Town {
      * @return A Terrain object.
      */
     private Terrain getNewTerrain() {
-        double rnd = Math.random();
-        if (rnd < .2) {
+        double rnd = (int) (Math.random() * 6);
+        if (rnd == 0) {
             return new Terrain("Mountains", "Rope");
-        } else if (rnd < .4) {
+        } else if (rnd == 1) {
             return new Terrain("Ocean", "Boat");
-        } else if (rnd < .6) {
+        } else if (rnd == 2) {
             return new Terrain("Plains", "Horse");
-        } else if (rnd < .8) {
+        } else if (rnd == 3) {
             return new Terrain("Desert", "Water");
+        } else if (rnd == 4) {
+            return new Terrain("Marsh", "Boots");
         } else {
             return new Terrain("Jungle", "Machete");
         }
