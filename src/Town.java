@@ -89,7 +89,7 @@ public class Town {
      * The chances of finding a fight and winning the gold are based on the toughness of the town.<p>
      * The tougher the town, the easier it is to find a fight, and the harder it is to win one.
      */
-    public void lookForTrouble() {
+    public String lookForTrouble() {
         double noTroubleChance;
         if (toughTown) {
             noTroubleChance = 0.66;
@@ -97,20 +97,24 @@ public class Town {
             noTroubleChance = 0.33;
         }
         if (Math.random() > noTroubleChance) {
-            printMessage = "You couldn't find any trouble";
+            System.out.println("You couldn't find any trouble");
         } else {
-            printMessage = "You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n";
+            System.out.println("You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n");
             int goldDiff = (int) (Math.random() * 10) + 1;
             if (Math.random() > noTroubleChance) {
-                printMessage += "Okay, stranger! You proved yer mettle. Here, take my gold.";
-                printMessage += "\nYou won the brawl and receive " + goldDiff + " gold.";
+                System.out.println("Okay, stranger! You proved yer mettle. Here, take my gold.");
+                System.out.println("\nYou won the brawl and receive " + goldDiff + " gold.");
                 hunter.changeGold(goldDiff);
             } else {
-                printMessage += "That'll teach you to go lookin' fer trouble in MY town! Now pay up!";
-                printMessage += "\nYou lost the brawl and pay " + goldDiff + " gold.";
+                System.out.println("That'll teach you to go lookin' fer trouble in MY town! Now pay up!");
+                System.out.println("\nYou lost the brawl and pay " + goldDiff + " gold.");
                 hunter.changeGold(-goldDiff);
+                if (hunter.getGold() < 0) {
+                    return "end";
+                }
             }
         }
+        return "";
     }
 
     public String infoString() {

@@ -16,6 +16,7 @@ public class TreasureHunter {
     private Town currentTown;
     private Hunter hunter;
     private boolean hardMode;
+    private boolean end = false;
 
     /**
      * Constructs the Treasure Hunter game.
@@ -52,6 +53,9 @@ public class TreasureHunter {
         String hard = SCANNER.nextLine().toLowerCase();
         if (hard.equals("y")) {
             hardMode = true;
+        } else if (hard.equals("test")) {
+            hunter.changeGold(80);
+            hunter.test();
         }
     }
 
@@ -93,7 +97,7 @@ public class TreasureHunter {
      */
     private void showMenu() {
         String choice = "";
-        while (!choice.equals("x")) {
+        while (!end) {
             System.out.println();
             System.out.println(currentTown.getLatestNews());
             System.out.println("***");
@@ -128,11 +132,20 @@ public class TreasureHunter {
                 enterTown();
             }
         } else if (choice.equals("l")) {
-            currentTown.lookForTrouble();
+            if (currentTown.lookForTrouble().equals("end")) {
+                end = true;
+                gameOver();
+            }
+
         } else if (choice.equals("x")) {
             System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
+            end = true;
         } else {
             System.out.println("Yikes! That's an invalid option! Try again.");
         }
+    }
+
+    public void gameOver() {
+        System.out.println("You have lost! :(");
     }
 }

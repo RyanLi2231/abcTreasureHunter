@@ -22,6 +22,10 @@ public class Hunter {
         gold = startingGold;
     }
 
+    public int getGold() {
+        return gold;
+    }
+
     //Accessors
     public String getHunterName() {
         return hunterName;
@@ -34,9 +38,6 @@ public class Hunter {
      */
     public void changeGold(int modifier) {
         gold += modifier;
-        if (gold < 0) {
-            gold = 0;
-        }
     }
 
     /**
@@ -190,5 +191,9 @@ public class Hunter {
             }
         }
         return -1;
+    }
+
+    public void test() {
+        kit = new String[]{"water", "rope", "machete", "horse", "boat"};
     }
 }
