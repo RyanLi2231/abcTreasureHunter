@@ -194,6 +194,6 @@ public class Hunter {
     }
 
     public void test() {
-        kit = new String[]{"water", "rope", "machete", "horse", "boat"};
+        kit = new String[]{"water", "rope", "machete", "horse", "boat", "boots"};
     }
 }
