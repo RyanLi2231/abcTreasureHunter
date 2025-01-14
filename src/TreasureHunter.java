@@ -139,7 +139,7 @@ public class TreasureHunter {
             }
 
         } else if (choice.equals("d")) {
-
+            currentTown.digForGold(hunter);
         } else if (choice.equals("x")) {
             System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
             end = true;
@@ -148,6 +148,9 @@ public class TreasureHunter {
         }
     }
 
+    /**
+     * Prints the final message after the user has lost
+     */
     public void gameOver() {
         System.out.println("You have lost! :(");
     }
