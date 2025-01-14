@@ -108,6 +108,7 @@ public class TreasureHunter {
             System.out.println("(E)xplore surrounding terrain.");
             System.out.println("(M)ove on to a different town.");
             System.out.println("(L)ook for trouble!");
+            System.out.println("(D)ig for gold");
             System.out.println("(H)unt for treasure");
             System.out.println("Give up the hunt and e(X)it.");
             System.out.println();
@@ -141,12 +142,6 @@ public class TreasureHunter {
         } else if (choice.equals("x")) {
             System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
             end = true;
-        } else if (choice.equals("h")) {
-            if (currentTown.isTreasureSearched()) {
-                System.out.println("You have already searched this town.");
-            } else {
-                searchForTreasure();
-            }
         } else {
             System.out.println("Yikes! That's an invalid option! Try again.");
         }
@@ -154,24 +149,5 @@ public class TreasureHunter {
 
     public void gameOver() {
         System.out.println("You have lost! :(");
-    }
-
-    public void searchForTreasure() {
-        boolean alreadyHas = false;
-        String result = currentTown.randomizeTreasure();
-        for (int current = 0; current < 3; current++) {
-            if (result.equals(hunter.getTreasureKit()[current])) {
-                alreadyHas = true;
-            }
-        }
-        if (alreadyHas) {
-            System.out.println("You found a " + result + " but you already have it");
-        } else {
-            System.out.println("You found a " + result);
-            if (!result.equals("dust")) {
-                hunter.addToTreasureKit(result);
-            }
-        }
-        currentTown.setTreasureSearched();
     }
 }
