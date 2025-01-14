@@ -14,6 +14,7 @@ public class Town {
     private boolean treasureSearched;
     private String treasure;
     private boolean dug;
+    private boolean easyMode;
 
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
@@ -104,7 +105,11 @@ public class Town {
         } else {
             System.out.println(Colors.RED +"You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n");
             int goldDiff = (int) (Math.random() * 10) + 1;
-            if (Math.random() > noTroubleChance) {
+            double rand = Math.random();
+            if (easyMode) {
+                rand += .10;
+            }
+            if (rand > noTroubleChance) {
                 System.out.println(Colors.RED + "Okay, stranger! You proved yer mettle. Here, take my gold.");
                 System.out.println("\nYou won the brawl and receive " + goldDiff + " gold.");
                 hunter.changeGold(goldDiff);
@@ -120,6 +125,33 @@ public class Town {
         return "";
     }
 
+    /**
+     * Allows the hunter to dig for gold as long as they have a shovel
+     * and they haven't dug in the town yet
+     * @param hunter Allows the code to access the hunter's info and
+     *               decide actions accordingly
+     */
+    public void digForGold(Hunter hunter) {
+        if (hunter.hasItemInKit("shovel")) {
+            if (dug) {
+                System.out.println("You already dug for gold in this town.");
+            } else if ((int) (Math.random() * 2) == 1) {
+                int numOfGold = (int) (Math.random() * 20 + 1);
+                hunter.changeGold(numOfGold);
+                System.out.println("You dug up " + numOfGold + " gold!");
+            } else {
+                System.out.println("You dug but only found dirt");
+            }
+            dug = true;
+        } else {
+            System.out.println("You can't dig for gold without a shovel");
+        }
+    }
+
+    /**
+     * Creates a string that prints the terrain
+     * @return returns the description for the terrain
+     */
     public String infoString() {
         return "This nice little town is surrounded by " + Colors.CYAN + terrain.getTerrainName() + "." + Colors.RESET;
     }
@@ -152,7 +184,19 @@ public class Town {
      * @return true if the item broke.
      */
     private boolean checkItemBreak() {
-        double rand = Math.random();
-        return (rand < 0.5);
+        if (!easyMode) {
+            double rand = Math.random();
+            return (rand < 0.5);
+        }
+        return false;
     }
+
+    /**
+     * Enables easy mode for the Town
+     */
+    public void easyMode() {
+        easyMode = true;
+
+    }
+
 }
