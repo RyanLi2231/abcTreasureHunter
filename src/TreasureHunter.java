@@ -17,6 +17,7 @@ public class TreasureHunter {
     private Hunter hunter;
     private boolean hardMode;
     private boolean easyMode;
+    private boolean samuraiMode;
     private boolean end = false;
 
     /**
@@ -60,6 +61,8 @@ public class TreasureHunter {
         } else if (difficulty.equals("test")) {
             hunter.changeGold(80);
             hunter.test();
+        } else if (difficulty.equals("s")) {
+            samuraiMode = true;
         }
     }
 
