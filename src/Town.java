@@ -11,6 +11,8 @@ public class Town {
     private Terrain terrain;
     private String printMessage;
     private boolean toughTown;
+    private boolean treasureSearched;
+    private String treasure;
     private boolean dug;
     private boolean easyMode;
 
@@ -68,7 +70,7 @@ public class Town {
             printMessage = "You used your " + Colors.PURPLE + item + " to cross the " + terrain.getTerrainName() + ".";
             if (checkItemBreak()) {
                 hunter.removeItemFromKit(item);
-                printMessage += "\nUnfortunately, you lost your " + Colors.PURPLE + item;
+                printMessage += "\nUnfortunately, your " + Colors.PURPLE + item + " broke.";
             }
             return true;
         }
