@@ -66,7 +66,7 @@ public class Town {
             printMessage = "You used your " + Colors.PURPLE + item + " to cross the " + terrain.getTerrainName() + ".";
             if (checkItemBreak()) {
                 hunter.removeItemFromKit(item);
-                printMessage += "\nUnfortunately, your " + Colors.PURPLE + item + " broke.";
+                printMessage += "\nUnfortunately, you lost your " + Colors.PURPLE + item;
             }
             return true;
         }
