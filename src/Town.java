@@ -12,6 +12,7 @@ public class Town {
     private String printMessage;
     private boolean toughTown;
     private boolean dug;
+    private boolean easyMode;
 
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
@@ -102,7 +103,11 @@ public class Town {
         } else {
             System.out.println(Colors.RED +"You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n");
             int goldDiff = (int) (Math.random() * 10) + 1;
-            if (Math.random() > noTroubleChance) {
+            double rand = Math.random();
+            if (easyMode) {
+                rand += .10;
+            }
+            if (rand > noTroubleChance) {
                 System.out.println(Colors.RED + "Okay, stranger! You proved yer mettle. Here, take my gold.");
                 System.out.println("\nYou won the brawl and receive " + goldDiff + " gold.");
                 hunter.changeGold(goldDiff);
@@ -118,6 +123,12 @@ public class Town {
         return "";
     }
 
+    /**
+     * Allows the hunter to dig for gold as long as they have a shovel
+     * and they haven't dug in the town yet
+     * @param hunter Allows the code to access the hunter's info and
+     *               decide actions accordingly
+     */
     public void digForGold(Hunter hunter) {
         if (hunter.hasItemInKit("shovel")) {
             if (dug) {
@@ -135,6 +146,10 @@ public class Town {
         }
     }
 
+    /**
+     * Creates a string that prints the terrain
+     * @return returns the description for the terrain
+     */
     public String infoString() {
         return "This nice little town is surrounded by " + Colors.CYAN + terrain.getTerrainName() + "." + Colors.RESET;
     }
@@ -167,7 +182,19 @@ public class Town {
      * @return true if the item broke.
      */
     private boolean checkItemBreak() {
-        double rand = Math.random();
-        return (rand < 0.5);
+        if (!easyMode) {
+            double rand = Math.random();
+            return (rand < 0.5);
+        }
+        return false;
     }
+
+    /**
+     * Enables easy mode for the Town
+     */
+    public void easyMode() {
+        easyMode = true;
+
+    }
+
 }

@@ -193,6 +193,9 @@ public class Hunter {
         return -1;
     }
 
+    /**
+     * stores items into the kit for the test game mode
+     */
     public void test() {
         kit = new String[]{"water", "rope", "machete", "horse", "boat", "boots", "shovel"};
     }
