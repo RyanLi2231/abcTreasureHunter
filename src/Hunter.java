@@ -21,6 +21,7 @@ public class Hunter {
         this.hunterName = hunterName;
         kit = new String[7]; // only 7 possible items can be stored in kit
         gold = startingGold;
+        gold = 500;
         treasureKit = new String[3];
     }
 
@@ -149,6 +150,16 @@ public class Hunter {
         if (!kitIsEmpty()) {
             str += " and " + Colors.PURPLE + getInventory() + Colors.RESET;
         }
+        str += "\nTreasures found: ";
+        if (treasureKitIsEmpty()) {
+            str += "none";
+        } else {
+            for (int current = 0; current < 3; current++) {
+                if (treasureKit[current] != null) {
+                    str += treasureKit[current] + " ";
+                }
+            }
+        }
         return str;
     }
 
@@ -183,6 +194,15 @@ public class Hunter {
         return true;
     }
 
+    private boolean treasureKitIsEmpty() {
+        for (String string : treasureKit) {
+            if (string != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * Finds the first index where there is a null value.
      *
@@ -201,12 +221,36 @@ public class Hunter {
         return treasureKit;
     }
 
-    public void addToTreasureKit(String input) {
-        for (int current = 0; current < 3; current++) {
-            if (treasureKit[current] == null) {
-                treasureKit[current] = input;
+    private int emptyPositionInTreasureKit() {
+        for (int i = 0; i < treasureKit.length; i++) {
+            if (treasureKit[i] == null) {
+                return i;
             }
         }
+        return -1;
+    }
+    public void addToTreasureKit(String input) {
+        treasureKit[emptyPositionInTreasureKit()] = input;
+    }
+
+    public int findItemInTreasureKit(String item) {
+        for (int i = 0; i < treasureKit.length; i++) {
+            String tmpItem = treasureKit[i];
+
+            if (item.equals(tmpItem)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public boolean treasureKitIsFull() {
+        for (int current = 0; current < 3; current++) {
+            if (treasureKit[current] == null) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
