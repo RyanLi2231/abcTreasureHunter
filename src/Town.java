@@ -219,8 +219,8 @@ public class Town {
             if (hunter.findItemInTreasureKit(treasure) != -1) {
                 System.out.print("You found a " + treasure + " but you already had it");
             } else {
-                System.out.println("You found a " + treasure);
                 hunter.addToTreasureKit(treasure);
+                System.out.println("You found a " + treasure);
             }
         }
     }

@@ -21,6 +21,7 @@ public class Hunter {
         this.hunterName = hunterName;
         kit = new String[7]; // only 5 possible items can be stored in kit
         gold = startingGold;
+        gold = 500;
         treasureKit = new String[3];
     }
 
@@ -239,6 +240,15 @@ public class Hunter {
             }
         }
         return -1;
+    }
+
+    public boolean treasureKitIsFull() {
+        for (int current = 0; current < 3; current++) {
+            if (treasureKit[current] == null) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
