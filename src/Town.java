@@ -15,6 +15,7 @@ public class Town {
     private String treasure;
     private boolean dug;
     private boolean easyMode;
+    private boolean samuraiMode;
 
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
@@ -103,22 +104,29 @@ public class Town {
         if (Math.random() > noTroubleChance) {
             System.out.println("You couldn't find any trouble");
         } else {
-            System.out.println(Colors.RED +"You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n");
             int goldDiff = (int) (Math.random() * 10) + 1;
-            double rand = Math.random();
-            if (easyMode) {
-                rand += .10;
-            }
-            if (rand > noTroubleChance) {
-                System.out.println(Colors.RED + "Okay, stranger! You proved yer mettle. Here, take my gold.");
-                System.out.println("\nYou won the brawl and receive " + goldDiff + " gold.");
+            if (samuraiMode) {
+                System.out.println(Colors.BLUE + "I see you want trouble str....ir.");
+                System.out.println(Colors.BLUE + "Apologies for angering you so dear samurai, please take my gold.");
+                System.out.println("You have recieved " + goldDiff + " gold.");
                 hunter.changeGold(goldDiff);
             } else {
-                System.out.println(Colors.RED + "That'll teach you to go lookin' fer trouble in MY town! Now pay up!");
-                System.out.println(Colors.RED + "\nYou lost the brawl and pay " + goldDiff + " gold.");
-                hunter.changeGold(-goldDiff);
-                if (hunter.getGold() < 0) {
-                    return "end";
+                System.out.println(Colors.RED +"You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n");
+                double rand = Math.random();
+                if (easyMode) {
+                    rand += .10;
+                }
+                if (rand > noTroubleChance) {
+                    System.out.println(Colors.RED + "Okay, stranger! You proved yer mettle. Here, take my gold.");
+                    System.out.println("\nYou won the brawl and receive " + goldDiff + " gold.");
+                    hunter.changeGold(goldDiff);
+                } else {
+                    System.out.println(Colors.RED + "That'll teach you to go lookin' fer trouble in MY town! Now pay up!");
+                    System.out.println(Colors.RED + "\nYou lost the brawl and pay " + goldDiff + " gold.");
+                    hunter.changeGold(-goldDiff);
+                    if (hunter.getGold() < 0) {
+                        return "end";
+                    }
                 }
             }
         }
@@ -196,7 +204,10 @@ public class Town {
      */
     public void easyMode() {
         easyMode = true;
-
     }
 
+    public void samuraiMode() {
+        samuraiMode = true;
+        shop.setSamurai(true);
+    }
 }

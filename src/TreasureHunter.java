@@ -97,6 +97,10 @@ public class TreasureHunter {
         if (easyMode) {
             currentTown.easyMode();
         }
+        if (samuraiMode) {
+            currentTown.samuraiMode();
+            hunter.samurai();
+        }
 
         // calling the hunterArrives method, which takes the Hunter
         // as a parameter; note this also could have been done in the
