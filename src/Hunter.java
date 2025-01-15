@@ -147,6 +147,16 @@ public class Hunter {
         if (!kitIsEmpty()) {
             str += " and " + Colors.PURPLE + getInventory() + Colors.RESET;
         }
+        str += "\nTreasures found: ";
+        if (treasureKitIsEmpty()) {
+            str += "none";
+        } else {
+            for (int current = 0; current < 3; current++) {
+                if (treasureKit[current] != null) {
+                    str += treasureKit[current] + " ";
+                }
+            }
+        }
         return str;
     }
 
@@ -174,6 +184,15 @@ public class Hunter {
      */
     private boolean kitIsEmpty() {
         for (String string : kit) {
+            if (string != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean treasureKitIsEmpty() {
+        for (String string : treasureKit) {
             if (string != null) {
                 return false;
             }
