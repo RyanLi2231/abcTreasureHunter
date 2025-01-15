@@ -33,6 +33,16 @@ public class Town {
 
         // higher toughness = more likely to be a tough town
         toughTown = (Math.random() < toughness);
+        int treasureChance = (int) (Math.random() * 4);
+        if (treasureChance == 0) {
+            treasure = "dust";
+        } else if (treasureChance == 1) {
+            treasure = "trophy";
+        } else if (treasureChance == 2) {
+            treasure = "crown";
+        } else {
+            treasure = "gem";
+        }
     }
 
     public Terrain getTerrain() {
@@ -199,4 +209,19 @@ public class Town {
 
     }
 
+    public void searchTreasure() {
+        if (treasureSearched) {
+            System.out.println("You have already searched this town.");
+        } else if (treasure.equals("dust")) {
+            System.out.println("You found dust");
+        } else {
+            treasureSearched = true;
+            if (hunter.findItemInTreasureKit(treasure) != -1) {
+                System.out.print("You found a " + treasure + " but you already had it");
+            } else {
+                System.out.println("You found a " + treasure);
+                hunter.addToTreasureKit(treasure);
+            }
+        }
+    }
 }

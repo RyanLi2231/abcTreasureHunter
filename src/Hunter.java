@@ -199,12 +199,27 @@ public class Hunter {
         return treasureKit;
     }
 
-    public void addToTreasureKit(String input) {
-        for (int current = 0; current < 3; current++) {
-            if (treasureKit[current] == null) {
-                treasureKit[current] = input;
+    private int emptyPositionInTreasureKit() {
+        for (int i = 0; i < treasureKit.length; i++) {
+            if (treasureKit[i] == null) {
+                return i;
             }
         }
+        return -1;
+    }
+    public void addToTreasureKit(String input) {
+        treasureKit[emptyPositionInTreasureKit()] = input;
+    }
+
+    public int findItemInTreasureKit(String item) {
+        for (int i = 0; i < treasureKit.length; i++) {
+            String tmpItem = treasureKit[i];
+
+            if (item.equals(tmpItem)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
