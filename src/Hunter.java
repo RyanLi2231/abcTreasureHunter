@@ -21,7 +21,6 @@ public class Hunter {
         this.hunterName = hunterName;
         kit = new String[7]; // only 7 possible items can be stored in kit
         gold = startingGold;
-        gold = 500;
         treasureKit = new String[3];
     }
 
