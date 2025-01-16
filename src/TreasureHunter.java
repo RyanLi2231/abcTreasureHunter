@@ -57,7 +57,7 @@ public class TreasureHunter {
             hardMode = true;
         } else if (difficulty.equals("e")) {
             easyMode = true;
-            hunter.changeGold(180);
+            hunter.changeGold(20);
         } else if (difficulty.equals("test")) {
             hunter.changeGold(80);
             hunter.test();
