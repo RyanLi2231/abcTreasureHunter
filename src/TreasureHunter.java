@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.awt.Color;
 
 /**
  * This class is responsible for controlling the Treasure Hunter game.<p>
@@ -19,6 +20,7 @@ public class TreasureHunter {
     private boolean easyMode;
     private boolean samuraiMode;
     private boolean end = false;
+    OutputWindow window = new OutputWindow();
 
     /**
      * Constructs the Treasure Hunter game.
@@ -43,16 +45,17 @@ public class TreasureHunter {
      * Creates a hunter object at the beginning of the game and populates the class member variable with it.
      */
     private void welcomePlayer() {
-        System.out.println("Welcome to TREASURE HUNTER!");
-        System.out.println("Going hunting for the big treasure, eh?");
-        System.out.print("What's your name, Hunter? ");
+        window.addTextToWindow("Welcome to TREASURE HUNTER!\n", Color.BLACK);
+        window.addTextToWindow("Going hunting for the big treasure, eh?\n", Color.BLACK);
+        window.addTextToWindow("What's your name, Hunter?", Color.BLACK);
         String name = SCANNER.nextLine().toLowerCase();
 
         // set hunter instance variable
         hunter = new Hunter(name, 20);
-
-        System.out.print("Easy, Normal, or Hard mode? (e/n/h): ");
+        window.clear();
+        window.addTextToWindow("Easy, Normal, or Hard mode? (e/n/h): ", Color.BLACK);
         String difficulty = SCANNER.nextLine().toLowerCase();
+        window.clear();
         if (difficulty.equals("h")) {
             hardMode = true;
         } else if (difficulty.equals("e")) {
@@ -115,30 +118,32 @@ public class TreasureHunter {
      * This method will loop until the user chooses to exit.
      */
     private void showMenu() {
-        String choice = "";
+        String choice;
         while (!end) {
+
             if (hunter.treasureKitIsFull()) {
-                System.out.println("Congratulations, you have found the last of the three treasures, you win!");
+                window.addTextToWindow("Congratulations, you have found the last of the three treasures, you win!", Color.BLACK);
                 end = true;
             } else {
-                System.out.println();
-                System.out.println(currentTown.getLatestNews());
-                System.out.println("***");
-                System.out.println(hunter.infoString());
-                System.out.println(currentTown.infoString());
-                System.out.println("(B)uy something at the shop.");
-                System.out.println("(S)ell something at the shop.");
-                System.out.println("(E)xplore surrounding terrain.");
-                System.out.println("(M)ove on to a different town.");
-                System.out.println("(L)ook for trouble!");
-                System.out.println("(D)ig for gold");
-                System.out.println("(H)unt for treasure");
-                System.out.println("Give up the hunt and e(X)it.");
-                System.out.println();
-                System.out.print("What's your next move? ");
+                String menu = "";
+                menu += currentTown.getLatestNews();
+                menu += ("\n***");
+                menu += (hunter.infoString() + "\n");
+                menu += (currentTown.infoString());
+                menu += ("\n(B)uy something at the shop.\n");
+                menu += ("(S)ell something at the shop.\n");
+                menu += ("(E)xplore surrounding terrain.\n");
+                menu += ("(M)ove on to a different town.\n");
+                menu += ("(L)ook for trouble!\n");
+                menu += ("(D)ig for gold\n");
+                menu += ("(H)unt for treasure\n");
+                menu += ("Give up the hunt and e(X)it.\n");
+                menu += ("What's your next move?");
+                window.addTextToWindow(menu, Color.BLACK);
                 choice = SCANNER.nextLine().toLowerCase();
                 processChoice(choice);
             }
+
         }
     }
 

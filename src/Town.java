@@ -26,7 +26,6 @@ public class Town {
     public Town(Shop shop, double toughness) {
         this.shop = shop;
         this.terrain = getNewTerrain();
-
         // the hunter gets set using the hunterArrives method, which
         // gets called from a client class
         hunter = null;
