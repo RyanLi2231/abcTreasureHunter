@@ -163,6 +163,8 @@ public class TreasureHunter {
                 gameOver();
             }
 
+        } else if (choice.equals("d")) {
+            currentTown.digForGold(hunter);
         } else if (choice.equals("x")) {
             System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
             end = true;
