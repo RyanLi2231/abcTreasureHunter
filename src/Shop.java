@@ -85,7 +85,8 @@ public class Shop {
                 }
             }
         }
-        return "You left the shop";
+        System.out.print("You left the shop");
+        return "";
     }
 
     /**
