@@ -122,15 +122,16 @@ public class TreasureHunter {
         while (!end) {
 
             if (hunter.treasureKitIsFull()) {
-                window.addTextToWindow("Congratulations, you have found the last of the three treasures, you win!", Color.BLACK);
+                window.addTextToWindow("\nCongratulations, you have found the last of the three treasures, you win!", Color.darkGray);
                 end = true;
             } else {
                 String menu = "";
                 menu += currentTown.getLatestNews();
-                menu += ("\n***");
-                menu += (hunter.infoString() + "\n");
-                menu += (currentTown.infoString());
-                menu += ("\n(B)uy something at the shop.\n");
+                menu += ("\n***\n");
+                window.addTextToWindow(menu, Color.black);
+                hunter.infoString();
+                currentTown.infoString();
+                menu = ("\n(B)uy something at the shop.\n");
                 menu += ("(S)ell something at the shop.\n");
                 menu += ("(E)xplore surrounding terrain.\n");
                 menu += ("(M)ove on to a different town.\n");
@@ -141,6 +142,7 @@ public class TreasureHunter {
                 menu += ("What's your next move?");
                 window.addTextToWindow(menu, Color.BLACK);
                 choice = SCANNER.nextLine().toLowerCase();
+                window.clear();
                 processChoice(choice);
             }
 
@@ -155,7 +157,7 @@ public class TreasureHunter {
         if (choice.equals("b") || choice.equals("s")) {
             currentTown.enterShop(choice);
         } else if (choice.equals("e")) {
-            System.out.println(currentTown.getTerrain().infoString());
+            currentTown.getTerrain().infoString();
         } else if (choice.equals("m")) {
             if (currentTown.leaveTown()) {
                 // This town is going away so print its news ahead of time.
@@ -171,12 +173,12 @@ public class TreasureHunter {
         } else if (choice.equals("d")) {
             currentTown.digForGold(hunter);
         } else if (choice.equals("x")) {
-            System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
+            window.addTextToWindow("Fare thee well, " + hunter.getHunterName() + "!", Color.black);
             end = true;
         } else if (choice.equals("h")) {
             currentTown.searchTreasure();
         } else {
-            System.out.println("Yikes! That's an invalid option! Try again.");
+            window.addTextToWindow("Yikes! That's an invalid option! Try again.", Color.black);
         }
     }
 

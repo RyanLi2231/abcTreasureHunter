@@ -1,3 +1,5 @@
+import java.awt.*;
+
 /**
  * The Terrain class is designed to represent the zones between the towns in the Treasure Hunter game.
  * This code has been adapted from Ivan Turner's original program -- thank you Mr. Turner!
@@ -47,7 +49,12 @@ public class Terrain {
     /**
      * @return A string representation of the terrain and item to cross it.
      */
-    public String infoString() {
-        return "You are surrounded by " + Colors.CYAN + terrainName + Colors.RESET + " which needs a(n) " + neededItem + " to cross.";
+    public void infoString() {
+        window.clear();
+        window.addTextToWindow("You are surrounded by ", Color.black);
+        window.addTextToWindow(terrainName, Color.cyan);
+        window.addTextToWindow(" which needs a(n) ", Color.black);
+        window.addTextToWindow(neededItem, Color.magenta);
+        window.addTextToWindow(" to cross.", Color.black);
     }
 }
