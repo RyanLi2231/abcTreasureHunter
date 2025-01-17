@@ -51,7 +51,7 @@ public class TreasureHunter {
         String name = SCANNER.nextLine().toLowerCase();
 
         // set hunter instance variable
-        hunter = new Hunter(name, 20);
+        hunter = new Hunter(name, 20, window);
         window.clear();
         window.addTextToWindow("Easy, Normal, or Hard mode? (e/n/h): ", Color.BLACK);
         String difficulty = SCANNER.nextLine().toLowerCase();
@@ -90,12 +90,12 @@ public class TreasureHunter {
         // note that we don't need to access the Shop object
         // outside of this method, so it isn't necessary to store it as an instance
         // variable; we can leave it as a local variable
-        Shop shop = new Shop(markdown);
+        Shop shop = new Shop(markdown, window);
 
         // creating the new Town -- which we need to store as an instance
         // variable in this class, since we need to access the Town
         // object in other methods of this class
-        currentTown = new Town(shop, toughness);
+        currentTown = new Town(shop, toughness, window);
 
         if (easyMode) {
             currentTown.easyMode();

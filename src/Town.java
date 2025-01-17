@@ -16,6 +16,7 @@ public class Town {
     private boolean dug;
     private boolean easyMode;
     private boolean samuraiMode;
+    private OutputWindow window;
 
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
@@ -23,7 +24,8 @@ public class Town {
      * @param shop The town's shoppe.
      * @param toughness The surrounding terrain.
      */
-    public Town(Shop shop, double toughness) {
+    public Town(Shop shop, double toughness, OutputWindow window) {
+        this.window = window;
         this.shop = shop;
         this.terrain = getNewTerrain();
         // the hunter gets set using the hunterArrives method, which
@@ -181,17 +183,17 @@ public class Town {
     private Terrain getNewTerrain() {
         double rnd = (int) (Math.random() * 6);
         if (rnd == 0) {
-            return new Terrain("Mountains", "Rope");
+            return new Terrain("Mountains", "Rope", window);
         } else if (rnd == 1) {
-            return new Terrain("Ocean", "Boat");
+            return new Terrain("Ocean", "Boat", window);
         } else if (rnd == 2) {
-            return new Terrain("Plains", "Horse");
+            return new Terrain("Plains", "Horse", window);
         } else if (rnd == 3) {
-            return new Terrain("Desert", "Water");
+            return new Terrain("Desert", "Water", window);
         } else if (rnd == 4) {
-            return new Terrain("Marsh", "Boots");
+            return new Terrain("Marsh", "Boots", window);
         } else {
-            return new Terrain("Jungle", "Machete");
+            return new Terrain("Jungle", "Machete", window);
         }
     }
 

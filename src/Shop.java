@@ -24,13 +24,15 @@ public class Shop {
     private double markdown;
     private Hunter customer;
     private boolean samurai;
+    private OutputWindow window;
 
     /**
      * The Shop constructor takes in a markdown value and leaves customer null until one enters the shop.
      *
      * @param markdown Percentage of markdown for selling items in decimal format.
      */
-    public Shop(double markdown) {
+    public Shop(double markdown, OutputWindow window) {
+        this.window = window;
         this.markdown = markdown;
         customer = null; // customer is set in the enter method
     }

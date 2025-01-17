@@ -7,6 +7,7 @@ public class Terrain {
     // instance variables
     private String terrainName;
     private String neededItem;
+    private OutputWindow window;
 
     /**
      * Sets the class member variables
@@ -14,7 +15,8 @@ public class Terrain {
      * @param name The name of the zone.
      * @param item The item needed in order to cross the zone.
      */
-    public Terrain(String name, String item) {
+    public Terrain(String name, String item, OutputWindow window) {
+        this.window = window;
         terrainName = name;
         neededItem = item.toLowerCase();
     }
